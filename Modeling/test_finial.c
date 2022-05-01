@@ -7,7 +7,6 @@
 #define TRUE 1
 #define FALSE 0
 
-
 typedef int Status;
 typedef int TElemType;
 typedef TElemType SqBiTree[MAX_SIZE];
