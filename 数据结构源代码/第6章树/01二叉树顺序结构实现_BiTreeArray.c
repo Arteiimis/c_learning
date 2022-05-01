@@ -203,7 +203,7 @@ void PreTraverse(SqBiTree T,int e)
 Status PreOrderTraverse(SqBiTree T)
 { 
 	if(!BiTreeEmpty(T)) /* Ê÷²»¿Õ */
-	 PreTraverse(T,0);
+	PreTraverse(T,0);
 	printf("\n");
 	return OK;
 }

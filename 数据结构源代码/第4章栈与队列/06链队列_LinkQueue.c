@@ -16,8 +16,8 @@ typedef int QElemType; /* QElemType类型根据实际情况而定，这里假设为int */
 
 typedef struct QNode	/* 结点结构 */
 {
-   QElemType data;
-   struct QNode *next;
+	QElemType data;
+    struct QNode *next;
 }QNode,*QueuePtr;
 
 typedef struct			/* 队列的链表结构 */
@@ -36,7 +36,7 @@ Status InitQueue(LinkQueue *Q)
 { 
 	Q->front=Q->rear=(QueuePtr)malloc(sizeof(QNode));
 	if(!Q->front)
-		exit(OVERFLOW);
+		exit(0);
 	Q->front->next=NULL;
 	return OK;
 }
@@ -46,9 +46,9 @@ Status DestroyQueue(LinkQueue *Q)
 {
 	while(Q->front)
 	{
-		 Q->rear=Q->front->next;
-		 free(Q->front);
-		 Q->front=Q->rear;
+		Q->rear=Q->front->next;
+		free(Q->front);
+		Q->front=Q->rear;
 	}
 	return OK;
 }
@@ -62,9 +62,9 @@ Status ClearQueue(LinkQueue *Q)
 	Q->front->next=NULL;
 	while(p)
 	{
-		 q=p;
-		 p=p->next;
-		 free(q);
+		q=p;
+		p=p->next;
+		free(q);
 	}
 	return OK;
 }
@@ -86,8 +86,8 @@ int QueueLength(LinkQueue Q)
 	p=Q.front;
 	while(Q.rear!=p)
 	{
-		 i++;
-		 p=p->next;
+		i++;
+		p=p->next;
 	}
 	return i;
 }
@@ -109,7 +109,7 @@ Status EnQueue(LinkQueue *Q,QElemType e)
 { 
 	QueuePtr s=(QueuePtr)malloc(sizeof(QNode));
 	if(!s) /* 存储分配失败 */
-		exit(OVERFLOW);
+		exit(0);
 	s->data=e;
 	s->next=NULL;
 	Q->rear->next=s;	/* 把拥有元素e的新结点s赋值给原队尾结点的后继，见图中① */
@@ -139,8 +139,8 @@ Status QueueTraverse(LinkQueue Q)
 	p=Q.front->next;
 	while(p)
 	{
-		 visit(p->data);
-		 p=p->next;
+		visit(p->data);
+		p=p->next;
 	}
 	printf("\n");
 	return OK;
