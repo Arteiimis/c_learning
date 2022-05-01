@@ -17,7 +17,8 @@ typedef struct{
 }Position;
 
 TElemType Nil=0;
-TElemType elem_num[MAX_SIZE] = {9, 20, 10, 10, 5, 5, 0, 0, 3, 2};
+//TElemType elem_num[MAX_SIZE] = {7, 10, 5, 5, 3, 2, 2, 3};     //药片总数为10的情况
+TElemType elem_num[MAX_SIZE] = {15, 20, 10, 10, 5, 5, 5, 5, 2, 3, 2, 3, 2, 3, 2, 3};      //药片总数为20的情况
 int elem_num_index = 1;
 
 Status InitBiTree(SqBiTree T);
@@ -54,10 +55,20 @@ Status CreateBiTree(TElemType elem_num[], SqBiTree T) {
 
 void LevelOrderTraverse(SqBiTree T) {
     int i = MAX_SIZE-1, j;
+    int sum = 0, temp = 0;
     while(T[i] == Nil)
         i--;
-    for(j = 0; j <= i; j++)
-        if(T[j] != Nil)
+    for(j = 0; j <= i; j++){
+        if(T[j] != Nil){
             printf("%d ", T[j]);
+            if (T[j] > 4) {
+                sum += T[j];
+            } else if(T[j] <= 4) {
+                temp = (T[j] + 1) * T[j] / 2;
+                sum += temp;
+            }
+        }
+    }
     printf("\n");
+    printf("层序循环过后得到的最小污染数为：%d", sum);
 }
