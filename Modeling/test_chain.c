@@ -3,6 +3,7 @@
 #define MAX_SIZE 100
 
 typedef int ElementType;
+ElementType Nil;
 typedef struct BiTreeNode{
     char data;
     struct BiTreeNode *lchild,*rchild;

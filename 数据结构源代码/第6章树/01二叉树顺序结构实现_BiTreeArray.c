@@ -106,7 +106,7 @@ Status Root(SqBiTree T,TElemType *e)
 /* 操作结果: 返回处于位置e(层,本层序号)的结点的值 */
 TElemType Value(SqBiTree T,Position e)
 { 
-	 return T[(int)powl(2,e.level-1)+e.order-2];
+	return T[(int)powl(2,e.level-1)+e.order-2];
 }
 
 /* 初始条件: 二叉树T存在,e是T中某个结点(的位置) */
