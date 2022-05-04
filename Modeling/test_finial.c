@@ -33,11 +33,10 @@ int main() {
     scanf("%d", &tape);
     elem_num[TreeIndex] = tape;
     
-    for(TreeIndex; elem_num[TreeIndex] > 2; TreeIndex += 1) {
+    for(TreeIndex; elem_num[TreeIndex] >= 2; TreeIndex += 1) {
         TreeIndex += 1;
         elem_num[TreeIndex] = elem_num[TreeIndex / 2] / 2;
         elem_num[TreeIndex + 1] = (elem_num[(TreeIndex + 1) / 2] / 2) + (elem_num[(TreeIndex + 1) / 2] % 2);
-            tape = (tape - 1)/2 + 1;
     }
     for(int i = 1; elem_num[i] != 0; i++){
         if(elem_num[i] < 2)
