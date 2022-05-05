@@ -90,7 +90,7 @@ void LevelOrderTraverse(SqBiTree T) {
             if (T[j] > 4) {
                 sum += T[j];
             } else if(T[j] <= 4) {
-                temp = (T[j] + 1) * T[j] / 2;
+                temp = ((T[j] + 1) * T[j]) / 2;
                 sum += temp;
             }
         }
