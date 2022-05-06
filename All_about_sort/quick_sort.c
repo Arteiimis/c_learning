@@ -1,20 +1,20 @@
 #include<stdio.h>
-void Quick_Sort( int *arr, int len );
+int listlen( int *arr );
+void Quick_Sort( int *arr );
 void Quick_Sort_Recursive( int *arr, int START, int END );
 void swap( int *a, int *b );
-
 
 // int main() {
 //     int arr[] = { 22, 34, 3, 32, 82, 55, 89, 50, 37, 5, 64, 35, 9, 70 };
 //     int len = sizeof(arr) / sizeof(arr[0]);
-
 //     Quick_Sort(arr, len - 1);
 //     for (int sign = 0; sign < len; sign++) {
 //         printf("%d ", arr[sign]);
 //     }
-// }
+// }\
 
-void Quick_Sort( int *arr, int len ){
+void Quick_Sort( int *arr ){
+    int len = listlen(arr);
     Quick_Sort_Recursive( arr, 0, len - 1 );
 }
 
@@ -46,4 +46,11 @@ void swap( int *a, int *b ){
     int temp = *a;
     *a = *b;
     *b = temp;
+}
+
+int listlen( int *arr ){
+    int len = 0;
+    while ( *arr++ )
+        len++;
+    return len;
 }
