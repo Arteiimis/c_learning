@@ -66,5 +66,13 @@
         "string.h": "c",
         "assert.h": "c",
         "queue.h": "c"
-    }
+    },
+    "code-runner.clearPreviousOutput": false,
+
+    "C_Cpp.updateChannel": "Insiders",
+    "cmake.configureOnOpen": true,
+    "explorer.confirmDelete": false,
+    "cmake.cmakePath": "D:\\CMake\\bin\\cmake.exe",
+    "workbench.editor.decorations.colors": true,
 }
+
