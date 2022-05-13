@@ -30,6 +30,7 @@ void Qsort(int *arr, int low, int high) {
 int Partition(int *arr, int low, int high) {
     int pivotkey;
 
+    //三数取中，避免无意义交换
     int mid = low + (high - low) / 2;
     if(arr[low] > arr[high])
         swap(&arr[low], &arr[high]);

@@ -8,9 +8,9 @@
 #define TRUE 1
 #define FALSE 0
 
-typedef int Status;
-typedef int TElemType;
-typedef TElemType SqBiTree[MAX_SIZE];
+typedef int Status; //全局函数的返回值类型
+typedef int TElemType;  //定义元素类型
+typedef TElemType SqBiTree[MAX_SIZE];   //定义顺序结构的二叉树数表
 
 typedef struct{
     int level, order;
@@ -58,13 +58,15 @@ int main() {
     printf("-----------------------------------------------------\n");
 }
 
-Status InitBiTree(SqBiTree T) {
+Status InitBiTree(SqBiTree T) 
+{
     int i;
     for( i = 0; i < MAX_SIZE; i++)
         T[i] = Nil;
 }
 
-Status CreateBiTree(TElemType elem_num[], SqBiTree T) {
+Status CreateBiTree(TElemType elem_num[], SqBiTree T) 
+{
     int i;
     for(i = 0; i < elem_num[0]; i++) {
         if(elem_num[i + 1] == 0) {
@@ -79,7 +81,8 @@ Status CreateBiTree(TElemType elem_num[], SqBiTree T) {
     }
 }
 
-void LevelOrderTraverse(SqBiTree T) {
+void LevelOrderTraverse(SqBiTree T) 
+{
     int i = MAX_SIZE-1, j;
     int sum = 0, temp = 0;
     while(T[i] == Nil)
