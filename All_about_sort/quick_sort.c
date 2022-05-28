@@ -33,7 +33,7 @@ void Quick_Sort_Recursive( int *arr, int START, int END ){
     Quick_Sort_Recursive( arr, left + 1, END );
 }
 
-void swap( int *a, int *b ){
+inline void swap( int *a, int *b ){
     int temp = *a;
     *a = *b;
     *b = temp;

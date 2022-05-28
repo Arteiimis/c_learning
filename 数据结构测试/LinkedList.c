@@ -72,3 +72,15 @@ int delete_node(List_single *pH, int data)
     printf("没有需要删除的节点！\n");
     return -1;
 }
+
+void Print_node(List_single *pH)
+{
+    List_single *node = pH;
+    node = node->next;
+    while(node->next != NULL)
+    {
+        printf("data: %d\n", node->data);
+        node = node->next;
+    }
+    printf("data: %d\n", node->data);
+}

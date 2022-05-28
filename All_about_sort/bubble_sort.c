@@ -33,7 +33,7 @@ void bubble_sort (int *arr) {
     }
 }
 
-void swap( int *a, int *b ){
+inline void swap( int *a, int *b ){
     int temp = *a;
     *a = *b;
     *b = temp;

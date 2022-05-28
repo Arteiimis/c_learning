@@ -1,0 +1,1 @@
+QUEUE *create_queue(int maxElement)

@@ -52,7 +52,7 @@ int Partition(int *arr, int low, int high) {
     return low;
 }
 
-void swap( int *a, int *b ){
+inline void swap( int *a, int *b ){
     int temp = *a;
     *a = *b;
     *b = temp;

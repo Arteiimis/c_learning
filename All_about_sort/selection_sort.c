@@ -13,7 +13,7 @@ int main(){
     }
 }
 
-void swap( int *a, int *b){
+inline void swap( int *a, int *b){
     int temp = *a;
     *a = *b;
     *b = temp;
