@@ -4,30 +4,36 @@
 
 #define BUCKET_SIZE 5
 
-typedef struct Node {
+typedef struct Node 
+{
     int elem;
     struct Node *list_next;
 }Node;
 
-typedef struct BucketManager {
+typedef struct BucketManager 
+{
     int nums;
     Node** buckets;
 }BucketManager;
 
-typedef struct BucketSpaceManger{
+typedef struct BucketSpaceManger
+{
     int index;
     Node* node_space;
 }BucketSpaceManager;
 
-BucketSpaceManager* init_bucket_space(int size){
+BucketSpaceManager* init_bucket_space(int size)
+{
     BucketSpaceManager* space_mgr = (BucketSpaceManager*)malloc(sizeof(BucketSpaceManager));
-    if(!space_mgr){
+    if(!space_mgr)
+    {
         printf("malloc failed\n");
         goto exit_1;
     }
     space_mgr->index = 0;
     space_mgr->node_space = (Node*)malloc(sizeof(Node)*size);
-    if(!space_mgr->node_space){
+    if(!space_mgr->node_space)
+    {
         printf("malloc failed\n");
         goto exit_2;
     }
@@ -38,15 +44,18 @@ BucketSpaceManager* init_bucket_space(int size){
         return NULL;
 }
 
-BucketManager* init_buckets(int bucket_nums){
+BucketManager* init_buckets(int bucket_nums)
+{
     BucketManager* bucket_mgr = (BucketManager*)malloc(sizeof(BucketManager));
-    if (!bucket_mgr){
+    if (!bucket_mgr)
+    {
         printf("out of memory,File:%s, Func:%s, Line:%d\n", __FILE__, __func__, __LINE__);
         goto exit_1;
     }
     bucket_mgr->nums = bucket_nums;
     bucket_mgr->buckets = (Node**)calloc(bucket_mgr->nums, sizeof(Node*));
-    if (!bucket_mgr->buckets){
+    if (!bucket_mgr->buckets)
+    {
         printf("out of memory,File:%s, Func:%s, Line:%d\n", __FILE__, __func__, __LINE__);
         goto exit_2;
     }
@@ -66,20 +75,22 @@ exit_1:
 //     }
 // }
 
-void release_bucket_space(BucketSpaceManager* space_mgr) {
-    if(space_mgr) {
-        if(space_mgr -> node_space) {
+void release_bucket_space(BucketSpaceManager* space_mgr) 
+{
+    if(space_mgr) 
+    {
+        if(space_mgr -> node_space) 
             free(space_mgr -> node_space);
-        }
         free(space_mgr);
     }
 }
 
-void release_buckets(BucketManager* bucket_mgr) {
-    if(bucket_mgr) {
-        if(bucket_mgr -> buckets) {
+void release_buckets(BucketManager* bucket_mgr) 
+{
+    if(bucket_mgr)
+    {
+        if(bucket_mgr -> buckets) 
             free(bucket_mgr -> buckets);
-        }
         free(bucket_mgr);
     }
 }
