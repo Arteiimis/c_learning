@@ -2,16 +2,16 @@
 #define _AVLTREE_
 
 #define ElementType int
-#define HEIGHT(p) ((p == NULL) ? 0 : ((Node *) (p)->height))    //宏定义高度函数
-#define MAX(a, b) ((a) > (b) ? (a) : (b))                       //宏定义最大值函数
+#define HEIGHT(p) ((p == NULL) ? 0 : ((Node *)(p)->height)) //宏定义高度函数
+#define MAX(a, b) ((a) > (b) ? (a) : (b))                   //宏定义最大值函数
 
 typedef struct AVLNode
 {
-    ElementType key;        //节点值
-    int height;             //该节点高度
-    struct AVLNode *left;   //左节点
-    struct AVLNode *right;  //右节点
-}Node, *AVLTree;
+    ElementType key;       //节点值
+    int height;            //该节点高度
+    struct AVLNode *left;  //左节点
+    struct AVLNode *right; //右节点
+} Node, *AVLTree;
 
 static Node *AVLTree_create_node(ElementType key, Node *left, Node *right); //创建AVL树
 int AVL_Height(AVLTree tree);                                               //返回AVL树的高度

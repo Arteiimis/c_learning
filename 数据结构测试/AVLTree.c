@@ -6,7 +6,8 @@
 static Node *AVLTree_create_node(ElementType key, Node *left, Node *right)
 {
     Node *p;
-    if((p = (Node *)malloc(sizeof(Node))) == NULL) return NULL;\
+    if ((p = (Node *)malloc(sizeof(Node))) == NULL)
+        return NULL;
 
     p->key = key;
     p->height = 0;
@@ -23,9 +24,9 @@ int AVL_Height(AVLTree tree)
 
 Node *Inter_Search(AVLTree x, ElementType key)
 {
-    while((x != NULL) && (x -> key != key))
+    while ((x != NULL) && (x->key != key))
     {
-        if(key < x->key)
+        if (key < x->key)
             x = x->left;
         else
             x = x->right;
@@ -36,17 +37,21 @@ Node *Inter_Search(AVLTree x, ElementType key)
 
 Node *AVL_minimum(AVLTree tree)
 {
-    if(tree == NULL) return NULL;
-    while(tree->left != NULL) tree = tree->left;
+    if (tree == NULL)
+        return NULL;
+    while (tree->left != NULL)
+        tree = tree->left;
 
     return tree;
 }
 
 Node *AVL_maximum(AVLTree tree)
 {
-    if(tree == NULL) return NULL;
-    while(tree->right != NULL) tree = tree->right;
-    
+    if (tree == NULL)
+        return NULL;
+    while (tree->right != NULL)
+        tree = tree->right;
+
     return tree;
 }
 
@@ -94,33 +99,33 @@ static Node *RL_Rotation(AVLTree k1)
 
 Node *AVL_Insert(AVLTree tree, ElementType key)
 {
-    if(tree = NULL)
+    if (tree = NULL)
     {
         //新建节点
         tree = AVLTree_create_node(key, NULL, NULL);
-        if(tree == NULL)
+        if (tree == NULL)
         {
             printf("ERROR: create node failed!\n");
             return NULL;
         }
     }
-    else if(key < tree->key)    //应该将key插入到tree左子树的情况
+    else if (key < tree->key) //应该将key插入到tree左子树的情况
     {
         tree->left = AVL_Insert(tree->left, key);
-        if(HEIGHT(tree->left) - HEIGHT(tree->right) == 2)
+        if (HEIGHT(tree->left) - HEIGHT(tree->right) == 2)
         {
-            if(key < tree->left->key)
+            if (key < tree->left->key)
                 tree = LL_Rotation(tree);
             else
                 tree = LR_Rotation(tree);
         }
     }
-    else if(key > tree->key)    //应该将key插入到tree右子树的情况
+    else if (key > tree->key) //应该将key插入到tree右子树的情况
     {
         tree->right = AVL_Insert(tree->right, key);
-        if(HEIGHT(tree->right) - HEIGHT(tree->left) == 2)
+        if (HEIGHT(tree->right) - HEIGHT(tree->left) == 2)
         {
-            if(key > tree->right->key)
+            if (key > tree->right->key)
                 tree = RR_Rotation(tree);
             else
                 tree = RL_Rotation(tree);
@@ -137,38 +142,39 @@ Node *AVL_Insert(AVLTree tree, ElementType key)
 
 static Node *Delete_Node(AVLTree tree, Node *z)
 {
-    if(tree == NULL || z == NULL) return NULL;
-    
-    if(z->key < tree->key)      //待删除节点在左子树中
+    if (tree == NULL || z == NULL)
+        return NULL;
+
+    if (z->key < tree->key) //待删除节点在左子树中
     {
         tree->left == Delete_Node(tree->left, z);
-        if(HEIGHT(tree->right) - HEIGHT(tree->left) == 2)
+        if (HEIGHT(tree->right) - HEIGHT(tree->left) == 2)
         {
             Node *r = tree->right;
-            if(HEIGHT(r->left) > HEIGHT(r->right))
+            if (HEIGHT(r->left) > HEIGHT(r->right))
                 tree = RL_Rotation(tree);
             else
                 tree = RR_Rotation(tree);
         }
     }
-    else if(z->key > tree->key) //待删除节点在右子树中
+    else if (z->key > tree->key) //待删除节点在右子树中
     {
         tree->right = Delete_Node(tree->right, z);
-        if(HEIGHT(tree->left) - HEIGHT(tree->right) == 2)
+        if (HEIGHT(tree->left) - HEIGHT(tree->right) == 2)
         {
             Node *l = tree->left;
-            if(HEIGHT(l->right) > HEIGHT(l->left))
+            if (HEIGHT(l->right) > HEIGHT(l->left))
                 tree = LR_Rotation(tree);
             else
                 tree = LL_Rotation(tree);
         }
     }
-    else                        //tree为对应要删除的节点
+    else // tree为对应要删除的节点
     {
         //左右节点都要非空
-        if((tree->left) && (tree->right))
+        if ((tree->left) && (tree->right))
         {
-            if(HEIGHT(tree->left) > HEIGHT(tree->right))
+            if (HEIGHT(tree->left) > HEIGHT(tree->right))
             {
                 /*  如果tree左子树比右子树高，则：
                  *      (01)找出tree左子树中的最大值；
@@ -176,7 +182,7 @@ static Node *Delete_Node(AVLTree tree, Node *z)
                  *      (03)删除该最大节点
                  *  类似于用tree的左子树中的最大节点，作为tree的替身
                  *  此时删除左子树中的最大节点，不会破坏AVL树的平衡
-                 */ 
+                 */
                 Node *max = AVL_maximum(tree->left);
                 tree->key = max->key;
                 tree->left = Delete_Node(tree->left, max);
@@ -189,7 +195,7 @@ static Node *Delete_Node(AVLTree tree, Node *z)
                  *      (03)删除该最小节点
                  *  类似于用tree的右子树中的最小节点，作为tree的替身
                  *  此时删除右子树的最小节点，不会破坏AVL树的平衡
-                 */ 
+                 */
                 Node *min = AVL_minimum(tree->right);
                 tree->key = min->key;
                 tree->right = Delete_Node(tree->right, min);
@@ -208,7 +214,7 @@ static Node *Delete_Node(AVLTree tree, Node *z)
 Node *AVL_Delete_byval(AVLTree tree, ElementType key)
 {
     Node *z;
-    if((z = Inter_Search(tree, key)) != NULL)
+    if ((z = Inter_Search(tree, key)) != NULL)
     {
         tree = Delete_Node(tree, z);
     }
@@ -218,9 +224,9 @@ Node *AVL_Delete_byval(AVLTree tree, ElementType key)
 
 void print_AVLTree(AVLTree tree, ElementType key, int direction)
 {
-    if(tree != NULL)
+    if (tree != NULL)
     {
-        if(direction == 0)
+        if (direction == 0)
             printf("%2d is root\n", tree->key);
         else
             printf("%2d is %2d's %6s child\n", tree->key, key, direction == 1 ? "right" : "left");
@@ -232,12 +238,13 @@ void print_AVLTree(AVLTree tree, ElementType key, int direction)
 
 void Destory_AVLTree(AVLTree tree)
 {
-    if(tree = NULL) return;
+    if (tree = NULL)
+        return;
 
-    if(tree->left != NULL)
+    if (tree->left != NULL)
         Destory_AVLTree(tree->left);
-    if(tree->right != NULL)
+    if (tree->right != NULL)
         Destory_AVLTree(tree->right);
-    
+
     free(tree);
 }
