@@ -20,7 +20,7 @@ Status InitBiTree(SqBiTree T)
 Status CreateBiTree(SqBiTree T)
 { 
 	int i=0;
- 	printf("请按层序输入结点的值(整型)，0表示空结点，输999结束。结点数≤%d:\n",MAX_TREE_SIZE);
+	printf("请按层序输入结点的值(整型)，0表示空结点，输999结束。结点数≤%d:\n",MAX_TREE_SIZE);
 	while(i<10)
 	{
 		T[i]=i+1;
