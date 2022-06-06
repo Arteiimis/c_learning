@@ -9,30 +9,30 @@ typedef struct TreeNode
     ElementType data;
     struct TreeNode *left;
     struct TreeNode *right;
-}Node;
+} Node;
 
 void createTree(Node **T)
 {
     ElementType data;
     scanf("%d", &data);
-    if(data == -1)
+    if (data == -1)
     {
         *T = NULL;
-    } 
+    }
     else
     {
         *T = (Node *)malloc(sizeof(struct TreeNode));
         (*T)->data = data;
         printf("请输入%d的左孩子节点：", data);
-        createTree(&( (*T)->left ));
+        createTree(&((*T)->left));
         printf("请输入%d的右孩子节点：", data);
-        createTree(&( (*T)->right ));
+        createTree(&((*T)->right));
     }
 }
 
 void pre_order(Node *T)
 {
-    if(T != NULL)
+    if (T != NULL)
     {
         printf("%d ", T->data);
         pre_order(T->left);
@@ -42,7 +42,7 @@ void pre_order(Node *T)
 
 void in_order(Node *T)
 {
-    if(T != NULL)
+    if (T != NULL)
     {
         in_order(T->left);
         printf("%d ", T->data);
@@ -52,7 +52,7 @@ void in_order(Node *T)
 
 void post_order(Node *T)
 {
-    if(T != NULL)
+    if (T != NULL)
     {
         post_order(T->left);
         post_order(T->right);
@@ -64,18 +64,18 @@ void level_order(Node *T)
 {
     QUEUE *q = create_queue(100);
 
-    while(T != NULL)
+    while (T != NULL)
     {
         printf("%d", T->data);
-        if(T->left != NULL)
+        if (T->left != NULL)
         {
             en_queue(T->left, q);
         }
-        if(T->right != NULL)
+        if (T->right != NULL)
         {
             en_queue(T->right, q);
         }
-        if(!is_empty(q))
+        if (!is_empty(q))
         {
             T = de_queue(q);
         }
@@ -90,7 +90,7 @@ void level_order(Node *T)
 int tree_deep(Node *T)
 {
     int deep = 0;
-    if(T)
+    if (T)
     {
         int leftdeep = tree_deep(T->left);
         int rightdeep = tree_deep(T->right);
@@ -98,4 +98,3 @@ int tree_deep(Node *T)
     }
     return deep;
 }
-

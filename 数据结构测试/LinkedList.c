@@ -1,15 +1,15 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-typedef struct Node 
+typedef struct Node
 {
     int data;
     struct Node *next;
-}List_single;
+} List_single;
 
-int main() {
-
+int main()
+{
 }
 
 //创建链表
@@ -17,7 +17,7 @@ List_single *createListNode(int data)
 {
     List_single *node = NULL;
     node = (List_single *)malloc(sizeof(List_single));
-    if(node == NULL) 
+    if (node == NULL)
     {
         printf("malloc failled!\n");
         return NULL;
@@ -32,7 +32,8 @@ List_single *createListNode(int data)
 void tail_insert(List_single *pH, List_single *new)
 {
     List_single *node = pH;
-    while (node->next != NULL) {
+    while (node->next != NULL)
+    {
         node = node->next;
     }
     node->next = new;
@@ -51,17 +52,18 @@ int delete_node(List_single *pH, int data)
 {
     List_single *node = pH;
     List_single *prev = NULL;
-    while(node->next != NULL) 
+    while (node->next != NULL)
     {
         prev = node;
         node = node->next;
-        if(node->data == data){
-            if(node->next != NULL) 
+        if (node->data == data)
+        {
+            if (node->next != NULL)
             {
                 prev->next = node->next;
                 free(node);
             }
-            else 
+            else
             {
                 prev->next = NULL;
                 free(node);
@@ -77,7 +79,7 @@ void Print_node(List_single *pH)
 {
     List_single *node = pH;
     node = node->next;
-    while(node->next != NULL)
+    while (node->next != NULL)
     {
         printf("data: %d\n", node->data);
         node = node->next;

@@ -4,7 +4,7 @@
 
 void makeEmpty(STACK *s)
 {
-    if(s != NULL)
+    if (s != NULL)
     {
         s->top = EMPTY_STACK;
     }
@@ -23,7 +23,7 @@ int isFull(STACK *s)
 STACK *create_stack(int maxElements)
 {
     STACK *s;
-    if(maxElements < MIN_STACK_SIZR)
+    if (maxElements < MIN_STACK_SIZR)
     {
         printf("栈容量过小！\n");
         return NULL;
@@ -38,7 +38,7 @@ STACK *create_stack(int maxElements)
 
 void dispoesStack(STACK *s)
 {
-    if(s != NULL)
+    if (s != NULL)
     {
         free(s->array);
         free(s);
@@ -47,7 +47,7 @@ void dispoesStack(STACK *s)
 
 void push(ElementType element, STACK *s)
 {
-    if(!isFull(s))
+    if (!isFull(s))
     {
         s->top++;
         s->array[s->top] = element;
@@ -60,7 +60,7 @@ void push(ElementType element, STACK *s)
 
 ElementType top(STACK *s)
 {
-    if(!isEmpty(s))
+    if (!isEmpty(s))
     {
         return s->array[s->top];
     }
@@ -73,7 +73,7 @@ ElementType top(STACK *s)
 
 void deleteTop(STACK *s)
 {
-    if(!isEmpty(s))
+    if (!isEmpty(s))
     {
         s->top--;
     }
@@ -85,7 +85,7 @@ void deleteTop(STACK *s)
 
 ElementType pop(STACK *s)
 {
-    if(!isEmpty(s))
+    if (!isEmpty(s))
     {
         return s->array[s->top--];
     }

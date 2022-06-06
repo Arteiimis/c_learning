@@ -4,7 +4,7 @@
 
 void make_empty(QUEUE *q)
 {
-    if(q != NULL)
+    if (q != NULL)
     {
         q->front = 1;
         q->rear = 0;
@@ -24,7 +24,7 @@ int is_full(QUEUE *q)
 
 QUEUE *create_queue(int maxElement)
 {
-    if(maxElement < MinQueueSize)
+    if (maxElement < MinQueueSize)
     {
         printf("队列长度过短！\n");
         return NULL;
@@ -41,14 +41,14 @@ QUEUE *create_queue(int maxElement)
 
 static int succ(int value, QUEUE *q)
 {
-    if(++value == q->capacity)
+    if (++value == q->capacity)
         value = 0;
     return value;
 }
 
 void en_queue(ElementType element, QUEUE *q)
 {
-    if(!is_full(q))
+    if (!is_full(q))
     {
         q->size++;
         q->rear = succ(q->rear, q);
@@ -62,7 +62,7 @@ void en_queue(ElementType element, QUEUE *q)
 
 ElementType front(QUEUE *q)
 {
-    if( !is_empty(q) )
+    if (!is_empty(q))
     {
         return q->array[q->front];
     }
@@ -74,7 +74,7 @@ ElementType front(QUEUE *q)
 
 ElementType de_queue(QUEUE *q)
 {
-    if( !is_empty(q) )
+    if (!is_empty(q))
     {
         int ret = q->array[q->front];
         q->size--;
@@ -90,7 +90,7 @@ ElementType de_queue(QUEUE *q)
 
 void dispose_queue(QUEUE *q)
 {
-    if(q != NULL)
+    if (q != NULL)
     {
         free(q->array);
         free(q);

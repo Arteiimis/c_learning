@@ -1,6 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 #define MAX_SIZE 100
 
 #define OK 1
@@ -8,40 +8,44 @@
 #define TRUE 1
 #define FALSE 0
 
-typedef int Status; //全局函数的返回值类型
-typedef int TElemType;  //定义元素类型
-typedef TElemType SqBiTree[MAX_SIZE];   //定义顺序结构的二叉树数表
+typedef int Status;                   //全局函数的返回值类型
+typedef int TElemType;                //定义元素类型
+typedef TElemType SqBiTree[MAX_SIZE]; //定义顺序结构的二叉树数表
 
-typedef struct{
+typedef struct
+{
     int level, order;
-}Position;
+} Position;
 
-TElemType Nil=0;
+TElemType Nil = 0;
 int TreeIndex = 1;
 
 Status InitBiTree(SqBiTree T);
 Status CreateBiTree(TElemType elem_num[], SqBiTree T);
 void LevelOrderTraverse(SqBiTree T);
 void Print(SqBiTree T);
-TElemType Value(SqBiTree T,Position e);
+TElemType Value(SqBiTree T, Position e);
 int BiTreeDepth(SqBiTree T);
 
-int main() {
+int main()
+{
     TElemType elem_num[MAX_SIZE] = {0};
     int tape, count;
     printf("请输入总药片数量：");
     scanf("%d", &tape);
     elem_num[TreeIndex] = tape;
-    
-    for(TreeIndex; elem_num[TreeIndex] >= 2; TreeIndex += 1) {
+
+    for (TreeIndex; elem_num[TreeIndex] >= 2; TreeIndex += 1)
+    {
         TreeIndex += 1;
         elem_num[TreeIndex] = elem_num[TreeIndex / 2] / 2;
         elem_num[TreeIndex + 1] = (elem_num[(TreeIndex + 1) / 2] / 2) + (elem_num[(TreeIndex + 1) / 2] % 2);
     }
-    for(int i = 1; elem_num[i] != 0; i++){
-        if(elem_num[i] < 2)
+    for (int i = 1; elem_num[i] != 0; i++)
+    {
+        if (elem_num[i] < 2)
             elem_num[i] = 0;
-        if(elem_num[i] >= 2)
+        if (elem_num[i] >= 2)
             count++;
     }
     elem_num[0] = count;
@@ -58,41 +62,45 @@ int main() {
     printf("-----------------------------------------------------\n");
 }
 
-Status InitBiTree(SqBiTree T) 
+Status InitBiTree(SqBiTree T)
 {
     int i;
-    for( i = 0; i < MAX_SIZE; i++)
+    for (i = 0; i < MAX_SIZE; i++)
         T[i] = Nil;
 }
 
-Status CreateBiTree(TElemType elem_num[], SqBiTree T) 
+Status CreateBiTree(TElemType elem_num[], SqBiTree T)
 {
     int i;
-    for(i = 0; i < elem_num[0]; i++) {
-        if(elem_num[i + 1] == 0) {
+    for (i = 0; i < elem_num[0]; i++)
+    {
+        if (elem_num[i + 1] == 0)
             T[i] = Nil;
-        } else {
+        else
             T[i] = elem_num[i + 1];
-        }
     }
-    while(i < MAX_SIZE) {
+    while (i < MAX_SIZE)
+    {
         T[i] = Nil;
         i++;
     }
 }
 
-void LevelOrderTraverse(SqBiTree T) 
+void LevelOrderTraverse(SqBiTree T)
 {
-    int i = MAX_SIZE-1, j;
+    int i = MAX_SIZE - 1, j;
     int sum = 0, temp = 0;
-    while(T[i] == Nil)
+    while (T[i] == Nil)
         i--;
-    for(j = 0; j <= i; j++){
-        if(T[j] != Nil){
+    for (j = 0; j <= i; j++)
+    {
+        if (T[j] != Nil)
+        {
             printf("%d ", T[j]);
-            if (T[j] > 4) {
+            if (T[j] > 4)
                 sum += T[j];
-            } else if(T[j] <= 4) {
+            else if (T[j] <= 4)
+            {
                 temp = ((T[j] + 1) * T[j]) / 2;
                 sum += temp;
             }
@@ -103,39 +111,40 @@ void LevelOrderTraverse(SqBiTree T)
 }
 
 void Print(SqBiTree T)
-{ 
-	int j,k;
-	Position p;
-	TElemType e;
-	for(j=1;j<=BiTreeDepth(T);j++)
-	{
-		printf("第%d层: ",j);
-		for(k=1;k<=powl(2,j-1);k++)
-		{
-			p.level=j;
-			p.order=k;
-			e=Value(T,p);
-			if(e!=Nil)
-				printf("%d:%-3d ",k,e);
-		}
-		printf("\n");
-	}
+{
+    int j, k;
+    Position p;
+    TElemType e;
+    for (j = 1; j <= BiTreeDepth(T); j++)
+    {
+        printf("第%d层: ", j);
+        for (k = 1; k <= powl(2, j - 1); k++)
+        {
+            p.level = j;
+            p.order = k;
+            e = Value(T, p);
+            if (e != Nil)
+                printf("%d:%-3d ", k, e);
+        }
+        printf("\n");
+    }
 }
 
-TElemType Value(SqBiTree T,Position e)
-{ 
-	return T[(int)powl(2,e.level-1)+e.order-2];
+TElemType Value(SqBiTree T, Position e)
+{
+    return T[(int)powl(2, e.level - 1) + e.order - 2];
 }
 
 int BiTreeDepth(SqBiTree T)
-{ 
+{
     int i, j = -1;
-    for(i = MAX_SIZE-1 ; i >= 0; i--)
-        if(T[i] != Nil)
+    for (i = MAX_SIZE - 1; i >= 0; i--)
+        if (T[i] != Nil)
             break;
-    i++; 
-    do{
+    i++;
+    do
+    {
         j++;
-    }while(i>=powl(2,j));
+    } while (i >= powl(2, j));
     return j;
 }
