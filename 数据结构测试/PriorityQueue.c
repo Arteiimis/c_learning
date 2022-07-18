@@ -112,7 +112,7 @@ int delete_min(PrioriQueue *pq, ElementType *min)
         //找到当前节点左右孩子中的最小节点
         if (minchild != pq->size && pq->eles[minchild + 1] < pq->eles[minchild])
             minchild++;
-        //如果最后一个元素比空节点处的子节点打，则继续下沉空节点，将该子节点上浮
+        //如果最后一个元素比空节点处的子节点大，则继续下沉空节点，将该子节点上浮
         if (last > pq->eles[minchild])
             pq->eles[i] = pq->eles[minchild];
         //否则说明last存放位置不会破坏队列性质，直接退出循环
