@@ -15,7 +15,8 @@
 //第二题
 // int main()
 // {
-//     int n = 0, sum = 1;
+//     int n = 0;
+//     long long int sum = 1;
 //     printf("Enter a number: ");
 //     scanf("%d", &n);
 //     for (int i = 1; i <= n; i++)

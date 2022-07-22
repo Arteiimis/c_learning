@@ -22,7 +22,7 @@
         "-o",
         "${fileDirname}\\${fileBasenameNoExtension}.exe"
       ],
-      "command": "D:\\mingw64\\bin\\gcc.exe",
+      "command": "D:\\mingw64\\bin\\g++.exe",
       "group": {
         "isDefault": true,
         "kind": "build"

@@ -70,7 +70,16 @@
         "time.h": "c",
         "crtdefs.h": "c",
         "corecrt.h": "c",
-        "_mingw.h": "c"
+        "_mingw.h": "c",
+        "iostream": "cpp",
+        "*.tcc": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "stdexcept": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "typeinfo": "cpp"
     },
     "code-runner.clearPreviousOutput": false,
 
