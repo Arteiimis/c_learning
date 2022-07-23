@@ -16,7 +16,14 @@ public:
     Account *next;
 };
 
-Account *head = NULL, *tail = NULL, *temp = NULL;
+Account *head, *tail, *temp;
+
+void init()
+{
+    head = NULL;
+    temp = NULL;
+    tail = NULL;
+}
 
 void write()
 {
@@ -25,11 +32,11 @@ void write()
     temp = head;
     while (temp != NULL)
     {
-        fout << temp->cardname << endl;
-        fout << temp->cardnumber << endl;
-        fout << temp->PWD << endl;
-        fout << temp->state << endl;
-        fout << temp->balance << endl;
+        fout << temp->cardname << " "
+            << temp->cardnumber << " "
+            << temp->PWD << " "
+            << temp->state << " "
+            << temp->balance << endl;
         temp = temp->next;
     }
     fout.close();
@@ -39,15 +46,17 @@ void read()
 {
     ifstream fin;
     fin.open("Account.txt", ios::in);
-    while (!fin.eof())
+    init();
+    while(1)
     {
         temp = new Account;
-        fin >> temp->cardname;
-        fin >> temp->cardnumber;
-        fin >> temp->PWD;
-        fin >> temp->state;
-        fin >> temp->balance;
-        if (head == NULL)
+        fin >> temp->cardname 
+            >> temp->cardnumber 
+            >> temp->PWD 
+            >> temp->state 
+            >> temp->balance;
+        temp->next = NULL;
+        if(head == NULL)
         {
             head = temp;
             tail = temp;
@@ -55,10 +64,11 @@ void read()
         else
         {
             tail->next = temp;
-            tail = temp;
+            tail = tail->next;
         }
     }
     fin.close();
+    system("cls");
 }
 
 void mainmenu()
@@ -81,21 +91,25 @@ void mainmenu()
 
 int getAccNumber()
 {
-    int c, len = 1;
-    FILE *fp;
-    fp = fopen("account.txt", "r");
-    if (fp)
+    ifstream fin;
+    int n = 0;
+    char line[512];
+    fin.open("Account.txt", ios::in);
+    if(fin.fail())
     {
-        while ((c = fgetc(fp)) != EOF)
-        {
-            if (c == '\n')
-                len++;
-        }
-        fclose(fp);
+        cout << "文件打开失败" << endl;
+        return 0;
     }
-    len += 10000;
-
-    return len;
+    else
+    {
+        while(!fin.eof())
+        {
+            fin.getline(line, 512, '\n');
+            n++;
+        }
+        return n + 6220000;
+    }
+    fin.close();
 }
 
 void creadCard()
@@ -441,11 +455,11 @@ void cancelAccount()
 
 int main()
 {
-    int choice;
-    mainmenu();
-    cin >> choice;
     while(1)
     {
+        int choice = 0;
+        mainmenu();
+        cin >> choice;
         switch (choice)
         {
         case 1:
