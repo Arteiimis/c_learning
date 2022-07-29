@@ -50,10 +50,10 @@ void read()
     while(1)
     {
         temp = new Account;
-        fin >> temp->cardname 
-            >> temp->cardnumber 
-            >> temp->PWD 
-            >> temp->state 
+        fin >> temp->cardname
+            >> temp->cardnumber
+            >> temp->PWD
+            >> temp->state
             >> temp->balance;
         temp->next = NULL;
         if(head == NULL)
