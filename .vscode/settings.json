@@ -89,5 +89,6 @@
     "explorer.confirmDelete": false,
     "cmake.cmakePath": "D:\\CMake\\bin\\cmake.exe",
     "workbench.editor.decorations.colors": true,
+    "C_Cpp.errorSquiggles": "Enabled",
 }
 

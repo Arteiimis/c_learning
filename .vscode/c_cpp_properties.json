@@ -2,14 +2,14 @@
     "configurations": [
         {
             "cppStandard": "gnu++23",
-            "cStandard": "c99",
+            "cStandard": "c11",
             "compilerPath": "D:\\mingw64\\bin\\g++.exe",
             "includePath": [
                 "${workspaceFolder}/**"
             ],
             "intelliSenseMode": "windows-gcc-x64",
-            "name": "Win32",
-            "configurationProvider": "ms-vscode.cmake-tools"
+            "name": "Win32"
+            //"configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
     "version": 4

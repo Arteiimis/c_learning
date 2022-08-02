@@ -13,7 +13,7 @@
   "tasks": [
     {
       "args": [
-        "-std=c18",
+        "-std=c11",
         "-Wall",
         "-Wextra",
         "-fexec-charset=UTF-8",
