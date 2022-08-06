@@ -107,6 +107,7 @@ int getAccNumber()
             fin.getline(line, 512, '\n');
             n++;
         }
+        fin.close();
         return n + 6220000;
     }
     fin.close();

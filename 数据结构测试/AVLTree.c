@@ -176,7 +176,7 @@ static Node *Delete_Node(AVLTree tree, Node *z)
         {
             if (HEIGHT(tree->left) > HEIGHT(tree->right))
             {
-                /*  如果tree左子树比右子树高，则：
+                /** 如果tree左子树比右子树高，则：
                  *      (01)找出tree左子树中的最大值；
                  *      (02)将该节点赋值给tree；
                  *      (03)删除该最大节点
@@ -189,7 +189,7 @@ static Node *Delete_Node(AVLTree tree, Node *z)
             }
             else
             {
-                /*  如果tree左子树不必右子树高，则：
+                /** 如果tree左子树不必右子树高，则：
                  *      (01)找出tree右子树中的最小值；
                  *      (02)将该节点赋值给tree；
                  *      (03)删除该最小节点

@@ -6,15 +6,15 @@
 typedef char Status;
 typedef int QElemType; //队列的结点
 
-typedef struct QNode	/* 结点结构 */
+typedef struct QNode    //结点结构
 {
-	QElemType data;
-    struct QNode *next;
+	QElemType data; //数据域
+    struct QNode *next; //指针域
 }QNode,*QueuePtr;
 
-typedef struct			/* 队列的链表结构 */
+typedef struct	    //队列的链表结构
 {
-   QueuePtr front,rear; /* 队头、队尾指针 */
+   QueuePtr front,rear; //队头、队尾指针
 }LinkQueue;
 
 Status InitQueue(LinkQueue *Q);//初始化队列
@@ -25,4 +25,4 @@ Status QueueEmpty(LinkQueue Q);//判断队列是否为空
 int QueueLength(LinkQueue Q);//返回队列长度
 
 
-#endif /* Queue_h */
+#endif

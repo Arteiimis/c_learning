@@ -8,6 +8,12 @@
 #define FALSE 0
 #define MAXSIZE 100
 
+/**
+ * @brief 初始化队列
+ * 
+ * @param Q 队列指针, 可以为NULL
+ * @return Status 
+ */
 Status InitQueue(LinkQueue *Q)
 { 
 	Q->front=Q->rear=(QueuePtr)malloc(sizeof(QNode));
@@ -17,6 +23,13 @@ Status InitQueue(LinkQueue *Q)
 	return OK;
 }
 
+/**
+ * @brief 入队
+ * 
+ * @param Q 队列指针
+ * @param e 入队元素
+ * @return Status 
+ */
 Status EnQueue(LinkQueue *Q,QElemType e)
 { 
 	QueuePtr s=(QueuePtr)malloc(sizeof(QNode));

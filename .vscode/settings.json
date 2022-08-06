@@ -83,7 +83,6 @@
         "stdbool.h": "c"
     },
     "code-runner.clearPreviousOutput": false,
-
     "C_Cpp.updateChannel": "Insiders",
     "cmake.configureOnOpen": true,
     "explorer.confirmDelete": false,
