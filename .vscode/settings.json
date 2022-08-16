@@ -84,10 +84,30 @@
     },
     "code-runner.clearPreviousOutput": false,
     "C_Cpp.updateChannel": "Insiders",
+    "C_Cpp.errorSquiggles": "Enabled",
+    "C_Cpp.intelliSenseEngine": "Default",
     "cmake.configureOnOpen": true,
     "explorer.confirmDelete": false,
     "cmake.cmakePath": "D:\\CMake\\bin\\cmake.exe",
     "workbench.editor.decorations.colors": true,
-    "C_Cpp.errorSquiggles": "Enabled",
+    "editor.semanticHighlighting.enabled": true,
+    "editor.formatOnType": true,
+    "clang.cflags": [
+        "--target=x86_64-w64-mingw",
+        "--std=c11",
+        "-Wall",
+        "-Wextra",
+    ],
+    "clang.cxxflags": [
+        "--target=x86_64-w64-mingw",
+        "-std=c++17",
+        "-Wall",
+        "-Wextra",
+    ],
+    "clang.completion.enable": true,
+    "clang.executable": "D:\\LLVM\\bin\\clang.exe",
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true,
+    }
 }
 
