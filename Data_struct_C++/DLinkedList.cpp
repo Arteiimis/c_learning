@@ -59,7 +59,7 @@ public:
     bool head_insert(T data);
     bool tail_insert(T data);
     bool insert(T data, int index);
-    int find_node(T data);
+    auto find_node(T data);
     bool delete_node(int index);
     int length();
     void print();
@@ -143,21 +143,28 @@ bool DLinkedList<T>::insert(T data, int index)
 }
 
 template <class T>
-int DLinkedList<T>::find_node(T data)
+auto DLinkedList<T>::find_node(T data)
 {
     Node<T> *ptr = head->next;
     int index = 0;
+    auto sign = index;
 
     while (ptr != tail)
     {
         if (ptr->data == data)
         {
-            return index;
+            sign = index;
+            break;
         }
         ptr = ptr->next;
         index++;
     }
-    return -1;
+    if (index == 0)
+    {
+        sign = false;
+    }
+
+    return sign;
 }
 
 template <class T>
@@ -169,13 +176,14 @@ bool DLinkedList<T>::delete_node(int index)
         return false;
     }
     Node<T> *ptr = head;
-    for (int i = 0; i < index; i++)
+    for (int i = 0; i <= index; i++)
     {
         ptr = ptr->next;
     }
     ptr->prev->next = ptr->next;
     ptr->next->prev = ptr->prev;
     delete ptr;
+
     return true;
 }
 
@@ -211,9 +219,22 @@ int main()
         dll.tail_insert(i);
     }
     dll.print();
-    // cout << dll.find_node(5) << endl;
-    cout << "number '5' found at index " << dll.find_node(5) << endl;
-    dll.delete_node(5);
+
+    int index;
+    int result;
+    cout << "type in which index you want to find: ";
+    cin >> index;
+    result = dll.find_node(index);
+
+    if (result == false)
+        cout << "not found" << endl;
+    else
+        cout << "found in index: " << result << endl;
+
+    cout << "type in which index you want to delete: ";
+    cin >> index;
+    dll.delete_node(index);
+
     dll.print();
 
     return 0;
