@@ -19,7 +19,7 @@ public:
     bool push(eletype val);
     eletype pop();
     bool DeleteEle(int index);
-    int Delete ();
+    int Delete();
     bool isfull()
     {
         return size == capacity;

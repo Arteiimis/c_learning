@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+
 int scape(int x, int L)
 {
 	int sum1;

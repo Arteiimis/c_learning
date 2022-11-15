@@ -41,6 +41,7 @@ int height(double hight, int count)
 //第四题
 bool isComnum(int n)
 {
+    int temp = n;
     int i, j, k;
     k = n % 10;
     n /= 10;
@@ -48,16 +49,17 @@ bool isComnum(int n)
     n /= 10;
     i = n % 10;
     n /= 10;
-    return i * i * i + j * j * j + k * k * k == n;
+    return i * i * i + j * j * j + k * k * k == temp;
 }
 
 int main()
 {
-    int n;
-    while (scanf("%d", &n) != EOF)
+    for(int i = 100; i < 1000; i++)
     {
-        if (isComnum(n))
-            printf("%d\n", n);
+        if(isComnum(i))
+        {
+            printf("%d ", i);
+        }
     }
 
     return 0;
