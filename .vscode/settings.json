@@ -186,6 +186,7 @@
     "clang.executable": "D:\\LLVM\\bin\\clang.exe",
     "editor.semanticTokenColorCustomizations": {
         "enabled": true,
-    }
+    },
+    "python.analysis.typeCheckingMode": "basic"
 }
 

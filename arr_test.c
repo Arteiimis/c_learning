@@ -1,77 +1,127 @@
 #include <stdio.h>
-#include <math.h>
+#include <string.h>
 
-int scape(int x, int L)
+#define N 50
+#define M 2 * N - 1
+
+typedef struct
 {
-	int sum1;
-	if (L == 1)
+	char data[5];
+	int weight;
+	int parent;
+	int lchild;
+	int rchild;
+} HTNode;
+
+typedef struct
+{
+	char cd[N];
+	int start;
+} HCode;
+
+void CreatHT(HTNode ht[], int n)
+{
+	int i, k, lnode, rnode;
+	int min1, min2;
+
+	for (i = 0; i < 2 * n - 1; i++)
+		ht[i].parent = ht[i].lchild = ht[i].rchild = 0;
+
+	for (i = n; i < 2 * n - 1; i++)
 	{
-		sum1 = x * (x + 1) / 2;
+		min1 = min2 = 32767;
+		lnode = rnode = 0;
+		for (k = 0; k <= i - 1; k++)
+		{
+			if (ht[k].parent == 0)
+			{
+				if (ht[k].weight < min1)
+				{
+					min2 = min1;
+					rnode = lnode;
+					min1 = ht[k].weight;
+					lnode = k;
+				}
+				else if (ht[k].weight < min2)
+				{
+					min2 = ht[k].weight;
+					rnode = k;
+				}
+			}
+		}
+
+		ht[lnode].parent = i;
+		ht[rnode].parent = i;
+		ht[i].weight = ht[lnode].weight + ht[rnode].weight;
+		ht[i].lchild = lnode;
+		ht[i].rchild = rnode;
 	}
-	else if (L == 2)
-	{
-		if (x >= 1 && x <= 2)
-		{
-			sum1 = x;
-		}
-		else if (x == 3)
-		{
-			sum1 = x + 1;
-		}
-		else
-		{
-			sum1 = 6;
-		}
-	}
-	return sum1;
 }
+
+void CreatHCode(HTNode ht[], HCode hcd[], int n)
+{
+	int i, f, c;
+	HCode hc;
+
+	for (i = 0; i < n; i++)
+	{
+		hc.start = n;
+		c = i;
+		f = ht[i].parent;
+		while (f != 0)
+		{
+			if (ht[f].lchild == c)
+				hc.cd[hc.start--] = '0';
+			else
+				hc.cd[hc.start--] = '1';
+			c = f;
+			f = ht[f].parent;
+		}
+		hc.start++;
+		hcd[i] = hc;
+	}
+}
+
+//逆序输出编码
+void DispHCode(HTNode ht[], HCode hcd[], int n)
+{
+	int k;
+	char codes[N];
+
+	printf("输出哈夫曼编码：\n");
+	for (int i = n - 1; i >= 0; i--)
+	{
+		strcpy(codes, ""); // reset the codes array
+		printf("    %s:\t", ht[i].data);
+		for (k = hcd[i].start; k <= n; k++)
+		{
+			codes[k - hcd[i].start] = hcd[i].cd[k];
+			printf("%c", hcd[i].cd[k]);
+		}
+		printf("\n");
+	}
+}
+
 
 int main()
 {
-	int x, t, y, f, L, sum, a, b, cnt = 0, t1, t2, sum2, sum3, binggo = 0;
-	scanf("%d %d", &x, &L);
+	int n = 8;
+	char *str[] = {"a", "b", "c", "d", "e", "f", "g", "h"};
+	int fnum[] = {7, 19, 2, 6, 32, 3, 21, 10};
+	HTNode ht[M];
+	HCode hcd[N];
 
-	f = x / 2;
-	t = x;
-	do
+	for (int i = 0; i < n; i++)
 	{
-		if (f % 2 == 1)
-		{
-			binggo = 1;
-		}
-		if (x % 2 == 1)
-		{
-			a = x / 2;
-			b = a + 1;
-		}
-		else
-		{
-			a = x / 2;
-			b = a;
-		}
-		x /= 2;
-		cnt++;
-
-	} while (x > 4);
-	int total = pow(2, cnt);
-	printf("cnt=%d,total=%d\n", cnt, total);
-	if (binggo == 1)
-	{
-		sum2 = 2;
-	}
-	else
-	{
-		sum2 = total / 2;
+		strcpy(ht[i].data, str[i]);
+		ht[i].weight = fnum[i];
 	}
 
-	sum3 = total - sum2;
-	printf("a=%d,b=%d", a, b);
-	sum = cnt * t;
-	printf("sum=%d,sum2=%d,sum3=%d\n", sum, sum2, sum3);
-	t1 = scape(a, L);
-	t2 = scape(b, L);
-	printf("t1=%d,t2=%d\n", t1, t2);
-	sum = t1 * sum2 + t2 * sum3 + sum;
-	printf("药片污染的最小次数为%d", sum);
+	printf("\n");
+	CreatHT(ht, n);
+	CreatHCode(ht, hcd, n);
+	DispHCode(ht, hcd, n);
+	printf("\n");
+
 	return 0;
 }
