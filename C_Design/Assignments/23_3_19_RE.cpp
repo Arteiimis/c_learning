@@ -15,7 +15,10 @@ private:
     node *head;
 
 public:
-    linkList() : size(0), head(nullptr) {}
+    linkList() : size(0)
+    {
+        this->head = new node(T(), nullptr);
+    }
 
     ~linkList()
     {
@@ -39,8 +42,8 @@ public:
 
     void headInsert(T data)
     {
-        node *newnode = new node(data, this->head);
-        this->head = newnode;
+        node *newnode = new node(data, this->head->next);
+        head->next = newnode;
         this->size++;
     }
 
@@ -50,9 +53,9 @@ public:
         node *newnode = new node(data);
         while (dummy->next != nullptr)
             dummy = dummy->next;
-        if (dummy == nullptr)
-        { // 如果链表为空
-            this->head = newnode;
+        if (dummy == this->head)
+        { // 如果插入的是第一个节点
+            this->head->next = newnode;
         }
         else
         {
@@ -62,12 +65,14 @@ public:
         this->size++;
     }
 
-    void sort() { _sort(this->head, nullptr); }
+    void sort()
+    {
+        _sort(this->head->next, nullptr);
+    }
 
     node *_sort(node *head, node *tail)
     {
-        if (head == tail)
-            return head;
+        if (head == tail) return head;
         node *slow = head, *fast = head;
         while (fast != tail && fast->next != tail)
         {
@@ -112,10 +117,10 @@ public:
     void print()
     {
         node *dummy = this->head;
-        while (dummy != nullptr)
+        while (dummy->next != nullptr)
         {
-            cout << dummy->data << " ";
             dummy = dummy->next;
+            cout << dummy->data << " ";
         }
         cout << endl;
     }
@@ -123,14 +128,17 @@ public:
 
 int main()
 {
-    // test sort
+    //test sort
 
     linkList<int> list;
-    // 随机插入十个数字到链表中
+    // 随即插入十个数字到链表中
     srand(time(NULL));
     for (int i = 0; i < 10; i++)
         list.tailInsert(rand() % 100);
     list.print();
     list.sort();
     list.print();
+
+
+
 }

@@ -153,6 +153,33 @@ node *add(node *head1, node *head2)
     return Node_merge(final_head);
 }
 
+//头删法
+void head_delete(node *head)
+{
+    node *p = head->next;
+    head->next = p->next;
+    if (p->next != NULL)
+        p->next->prev = head;
+    free(p);
+}
+
+//尾删法
+void tail_delete(node *head)
+{
+    for (; head->next->next != NULL; head = head->next);
+    node *p = head->next;
+    head->next = NULL;
+    free(p);
+}
+
+bool is_empty(node *head)
+{
+    if (head->next == NULL)
+        return true;
+    else
+        return false;
+}
+
 int main()
 {
     node *list1 = init();
