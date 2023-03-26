@@ -89,18 +89,99 @@ void tailInsert(dlList *plist, ElemType data)
     prevInsert(plist, plist->head, data);
 }
 
+void insertArr(dlList *plist, ElemType *first, ElemType *last)
+{   
+    assert(plist != nullptr && first != nullptr && last != nullptr);
+
+    while (first != last)
+    {
+        tailInsert(plist, *first);
+        first++;
+    }
+}
+
+dlNode *findVal(dlList *plist, ElemType val)
+{
+    assert(plist != nullptr);
+
+    dlNode *ptr = plist->head->next;
+    while (ptr != plist->head)
+    {
+        if (ptr->data == val)
+            return ptr;
+        ptr = ptr->next;
+    }
+
+    return nullptr;
+}
+
+std::vector<dlNode*> findValAll(dlList *plist, ElemType val)
+{
+    assert(plist != nullptr);
+
+    std::vector<dlNode*> vec;
+    dlNode *ptr = plist->head->next;
+    while (ptr != plist->head)
+    {
+        if (ptr->data == val)
+            vec.push_back(ptr);
+        ptr = ptr->next;
+    }
+
+    return vec;
+}
+
 // 删除当前节点
 status erase(dlList *plist, dlNode *ptr)
 {
     assert(plist != nullptr);
     if (nullptr == ptr)
         return ERROR;
-    dlNode *temp = ptr;
-    temp->prev->next = temp->next;
-    temp->next = temp->prev;
+    ptr->prev->next = ptr->next;
+    ptr->next->prev = ptr->prev;
+    plist->cursize--;
 
-    freeNode(temp);
+    freeNode(ptr);
     return OK;
+}
+
+status eraseAll(dlList *plist, ElemType val)
+{
+    assert(plist != nullptr);
+
+    dlNode *ptr = plist->head->next;
+    while (ptr != plist->head)
+    {
+        if (ptr->data == val)
+        {
+            dlNode *temp = ptr->next;
+            erase(plist, ptr);
+            ptr = temp;
+        }
+        ptr = ptr->next;
+    }
+
+    return OK;
+}
+
+void clear(dlList *plist)
+{
+    assert(plist != nullptr);
+
+    dlNode *ptr = plist->head->next;
+    while (ptr != plist->head)
+    {
+        dlNode *temp = ptr->next;
+        erase(plist, ptr);
+        ptr = temp;
+    }
+}
+
+void _push_back(dlList *plist, int val)
+{
+    assert(plist != nullptr);
+
+    prevInsert(plist, plist->head, val);
 }
 
 dlNode *pop_front(dlList *plist)
@@ -118,6 +199,11 @@ void ptintList(dlList *plist)
     assert(plist != nullptr);
 
     dlNode *ptr = plist->head->next;
+    if (ptr == plist->head)
+    {
+        printf("empty list");
+        return;
+    }
     while (ptr != plist->head)
     {
         printf("%d ", ptr->data);
@@ -130,19 +216,26 @@ int main()
 {
     dlList list;
     initList(&list);
-    for (int i = 0; i < 10; i++)
-        tailInsert(&list, i);
-
+    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    insertArr(&list, arr, arr + 10);
     ptintList(&list);
-
-    for (int i = 0; i < 10; i++)
-        headInsert(&list, i);
-
+    eraseAll(&list, 5);
     ptintList(&list);
-
-    erase(&list, list.head->next);
-
+    clear(&list);
     ptintList(&list);
+    // for (int i = 0; i < 10; i++)
+    //     tailInsert(&list, i);
+
+    // ptintList(&list);
+
+    // for (int i = 0; i < 10; i++)
+    //     headInsert(&list, i);
+
+    // ptintList(&list);
+
+    // erase(&list, list.head->next);
+
+    // ptintList(&list);
 
     return 0;
 }
