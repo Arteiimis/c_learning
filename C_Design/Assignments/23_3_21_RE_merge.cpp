@@ -21,7 +21,7 @@ private:
     int size;
 
 public:
-    dlList() :  size(0) 
+    dlList() : size(0)
     {
         head = new dlNode(0);
         tail = new dlNode(0);
@@ -128,11 +128,11 @@ int main()
     for (int i = 0; i < 10000; i++)
         dlList.tailInsert(rand() % 10);
 
-    //dlList.print();
+    // dlList.print();
     auto start = high_resolution_clock::now();
     dlList.sort();
     auto stop = high_resolution_clock::now();
-    //dlList.print();
+    // dlList.print();
 
     auto duration = duration_cast<microseconds>(stop - start);
     cout << "Time taken by function: "
