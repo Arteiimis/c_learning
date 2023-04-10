@@ -187,6 +187,13 @@
     "editor.semanticTokenColorCustomizations": {
         "enabled": true,
     },
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": false,
+        "plaintext": false,
+        "markdown": false,
+        "cpp": true
+    },
 }
 
