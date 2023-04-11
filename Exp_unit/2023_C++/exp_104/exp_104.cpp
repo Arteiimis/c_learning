@@ -1,5 +1,4 @@
-#include "time.h"
-using namespace std;
+#include "htime.h"
 
 int main()
 {
