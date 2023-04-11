@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 #include <chrono>
+#include <windows.h>
+#include <psapi.h>
 using namespace std;
 
 void mergeSort(vector<int> &nums, int left, int right)
@@ -99,12 +101,19 @@ int main()
         nums[i] = rng() % 10000;
     }
 
-    auto start = chrono::steady_clock::now();
-    mergeSort_ite(nums);
-    auto end = chrono::steady_clock::now();
+    // auto start = chrono::steady_clock::now();
+    // mergeSort_ite(nums);
+    // auto end = chrono::steady_clock::now();
     
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
+    // auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 
-    cout << "Time taken by function: "
-         << duration.count() << " microseconds" << endl;
+    // cout << "Time taken by function: "
+    //      << duration.count() << " microseconds" << endl;
+    mergeSort_ite(nums);
+
+    PROCESS_MEMORY_COUNTERS pmc;    // 用于获取内存信息
+    GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));   // 获取内存信息
+    SIZE_T virtualMemUsedByMe = pmc.WorkingSetSize; // 获取内存使用量
+
+    cout << "Memory used by me: " << virtualMemUsedByMe / 1024 << " KB" << endl;
 }

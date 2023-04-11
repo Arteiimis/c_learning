@@ -1,6 +1,5 @@
 {
   "configurations": [
-  
     {
       "MIMode": "gdb",
       "args": [],
