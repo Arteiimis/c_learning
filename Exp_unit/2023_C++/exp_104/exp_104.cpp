@@ -17,4 +17,6 @@ int main()
     t1_ref.input_time();
     cout << t1_ref.output_time() << endl;
     cout << t1_ref.output_hour() << "时" << t1_ref.output_minute() << "分" << t1_ref.output_second() << "秒" << endl;
+
+    return 0;
 }

@@ -1,60 +1,54 @@
 #include <iostream>
+#include <string>
 using namespace std;
-class Myclass
+class person
 {
 private:
-    int a, b;
+    char *name;
 
 public:
-    Myclass(int x1 = 0, int x2 = 0)
+    person(char *pn);         // 构造函数声明
+    ~person(void);            // 析构函数声明
+    person(const person &ob); // 拷贝构造函数声明
+    char *get_name(void)
     {
-        a = x1;
-        b = x2;
-        cout << "构造函数被调用！" << endl;
+        return name;
     }
-    ~Myclass()
-    {
-        cout << "析构函数被调用！" << endl;
-    }
-    Myclass(Myclass &ob)
-    {
-        a = ob.a;
-        b = ob.b;
-        cout << "拷贝构造函数被调用！" << endl;
-    }
-    void print(void)
-    {
-        cout << "a=" << a << "  b=" << b << endl;
-    }
+    void print_name(void);
 };
-void func1(Myclass ob)
+
+person::person(char *pn) // 定义构造函数，为name提供值
 {
-    cout << "func1: ";
-    ob.print();
+    name =   ② ;
+    if (name != NULL)
+        ③ ;
 }
-void func2(Myclass *ob)
+
+person::~person(void) // 显示定义析构函数
 {
-    cout << "func2: ";
-    ob->print();
+    delete[] name;
 }
-void func3(Myclass &ob)
+
+person::person(const person &ob) // 定义拷贝构造函数
 {
-    cout << "func3: ";
-    ob.print();
+    name =  ④ ;
+    if (name != NULL)
+        ⑤ ;
 }
-int main()
+
+void person::print_name(void)
 {
-    Myclass ob(10, 10);
-    cout << "main: ";
-    ob.print();
-    cout << "调用func1：" << endl;
-    func1(ob);
-    cout << "调用func2：" << endl;
-    func2(&ob);
-    cout << "调用func3：" << endl;
-    func3(ob);
-    cout << "main: ";
-    ob.print();
+    cout << name << endl;
+}
+
+int main(void)
+{
+    person p1("张三");
+    person p2 = p1;
+    cout << "姓名:";
+    p1.print_name();
+    cout << "姓名:";
+    p2.print_name();
 
     return 0;
 }
