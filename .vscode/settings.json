@@ -167,7 +167,6 @@
     "C_Cpp.intelliSenseEngine": "default",
     "cmake.configureOnOpen": true,
     "explorer.confirmDelete": false,
-    "cmake.cmakePath": "D:\\CMake\\bin\\cmake.exe",
     "workbench.editor.decorations.colors": true,
     "editor.semanticHighlighting.enabled": true,
     "editor.formatOnType": true,

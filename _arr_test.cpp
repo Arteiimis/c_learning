@@ -30,15 +30,15 @@ void point::move(float a, float b)
 	y += b;
 }
 
-// int main(void)
-// {
-// 	point p1, &p2 = p1;
-// 	p1.set_point(20, 30);
-// 	cout << "x=" << p1.read_x();
-// 	cout << "  y=" << p1.read_y() << endl;
-// 	cout << "x=" << p2.read_x();
-// 	cout << "  y=" << p2.read_y() << endl;
-// 	p2.move(5, 5);
-// 	cout << "x=" << p1.read_x();
-// 	cout << "  y=" << p1.read_y() << endl;
-// }
+int main(void)
+{
+	point p1, &p2 = p1;
+	p1.set_point(20, 30);
+	cout << "x=" << p1.read_x();
+	cout << "  y=" << p1.read_y() << endl;
+	cout << "x=" << p2.read_x();
+	cout << "  y=" << p2.read_y() << endl;
+	p2.move(5, 5);
+	cout << "x=" << p1.read_x();
+	cout << "  y=" << p1.read_y() << endl;
+}
