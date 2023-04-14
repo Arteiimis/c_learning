@@ -21,4 +21,5 @@ public:
     int output_second();
 };
 
+#include "htime.cpp"
 #endif

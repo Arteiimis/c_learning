@@ -99,7 +99,7 @@ void printArr(int *a, const int n)
 int main()
 {
     priorityQueue *pq = init(10);
-    //随即插入十个数据
+    //闅忓嵆鎻掑叆鍗佷釜鏁版嵁
     srand(time(0));
     for (int i = 0; i < 10; i++)
         push(pq, rand() % 100);
