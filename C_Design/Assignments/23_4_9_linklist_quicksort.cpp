@@ -16,7 +16,7 @@ private:
     int cursize;
 
 public:
-    linkList():head(nullptr),cursize(0){}
+    linkList() : head(nullptr), cursize(0) {}
 
     void insert(int d)
     {
@@ -42,31 +42,34 @@ public:
         quickSort(head, nullptr);
     }
 
-    void quickSort(node *start, node *end)
+    void quickSort(node *head, node *tail)
     {
-        if (start == end)
+        if (head == tail || head->next == tail)
             return;
-        node *p = partition(start, end);
-        quickSort(start, p);
-        quickSort(p->next, end);
-    }
-
-    node *partition(node *start, node *end)
-    {
-        int pivot = start->data;
-        node *p = start, *q = start->next;
-        while (q != end)
+        node *p = head, *q = head->next;
+        while (q != tail)
         {
-            if (q->data < pivot)
+            if (q->data < head->data)
             {
                 p = p->next;
                 swap(p->data, q->data);
             }
             q = q->next;
         }
-        swap(p->data, start->data);
-        return p;
+        swap(p->data, head->data);
+        quickSort(head, p);
+        quickSort(p->next, tail);
     }
-    
-    node 
 };
+
+int main()
+{
+    linkList list;
+    for (int i = 0; i < 10; i++)
+        list.insert(rand() % 100);
+    list.print();
+    list.quickSort();
+    list.print();
+
+    return 0;
+}
