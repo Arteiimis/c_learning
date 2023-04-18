@@ -1,7 +1,5 @@
 #include <bits/stdc++.h>
-#include <chrono>
-#include <windows.h>
-#include <psapi.h>
+#include "program_tester/tester.h"
 using namespace std;
 
 void mergeSort(vector<int> &nums, int left, int right)
@@ -47,7 +45,11 @@ void mergeSort(vector<int> &nums, int left, int right)
 
 void mergeSort(vector<int> &nums)
 {
+    MONITOR_FUNCTION_BEGIN();
+
     mergeSort(nums, 0, nums.size() - 1);
+
+    MONITOR_FUNCTION_END();
 }
 
 // 归并排序迭代实现
@@ -118,35 +120,92 @@ void quickSort(vector<int> &nums, int left, int right)
     quickSort(nums, i + 1, right);
 }
 
+int randomPartition(vector<int> &nums, int left, int right)
+{
+    srand(time(nullptr));
+    int i = rand() % (right - left + 1) + left;
+    swap(nums[i], nums[left]); // 将随机选取的元素交换到序列左端
+
+    int pivot = nums[left]; // 基准值
+    int j = left;           // j 指向小于基准值的子序列的最后一个元素
+
+    // 将小于基准值的元素放到基准值的左边
+    for (int k = left + 1; k <= right; k++) // 从基准值的下一个元素开始遍历
+    {
+        // 如果当前元素小于基准值
+        if (nums[k] < pivot)
+            swap(nums[++j], nums[k]); // 将当前元素交换到小于基准值的子序列的最后一个元素的后面
+    }
+
+    swap(nums[left], nums[j]); // 将基准值交换到小于基准值的子序列的最后一个元素的后面
+    return j;                  // 返回基准值的位置
+}
+
+int midPartition(vector<int> &nums, int left, int right)
+{
+    int mid = left + (right - left) / 2;
+    if (nums[left] > nums[mid])
+        swap(nums[left], nums[mid]);
+    if (nums[left] > nums[right])
+        swap(nums[left], nums[right]);
+    if (nums[mid] > nums[right])
+        swap(nums[mid], nums[right]);
+
+    swap(nums[mid], nums[left]); // 将中间值交换到序列左端
+
+    int pivot = nums[left]; // 基准值
+    int j = left;           // j 指向小于基准值的子序列的最后一个元素
+
+    // 将小于基准值的元素放到基准值的左边
+    for (int k = left + 1; k <= right; k++) // 从基准值的下一个元素开始遍历
+    {
+        // 如果当前元素小于基准值
+        if (nums[k] < pivot)
+            swap(nums[++j], nums[k]); // 将当前元素交换到小于基准值的子序列的最后一个元素的后面
+    }
+
+    swap(nums[left], nums[j]); // 将基准值交换到小于基准值的子序列的最后一个元素的后面
+    return j;                  // 返回基准值的位置
+}
+
+void quickSort_rand(vector<int> &nums, int left, int right)
+{
+    if (left >= right)
+        return; // 如果左右指针相遇，返回
+    int pivot = randomPartition(nums, left, right);
+    quickSort_rand(nums, left, pivot - 1);
+    quickSort_rand(nums, pivot + 1, right);
+}
+
+void quickSort_mid(vector<int> &nums, int left, int right)
+{
+    if (left >= right)
+        return; // 如果左右指针相遇，返回
+    int pivot = midPartition(nums, left, right);
+    quickSort_mid(nums, left, pivot - 1);
+    quickSort_mid(nums, pivot + 1, right);
+}
+
 void quickSort(vector<int> &nums)
 {
-    quickSort(nums, 0, nums.size() - 1);
+    MONITOR_FUNCTION_BEGIN();
+
+    quickSort_rand(nums, 0, nums.size() - 1);
+
+    MONITOR_FUNCTION_END();
 }
 
 int main()
 {
-    mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-    vector<int> nums(10000);
-    for (unsigned long long i = 0; i < nums.size(); i++)
-    {
-        nums[i] = rng() % 10000;
-    }
+    vector<int> nums;
+    Fill(nums, 10000, make_pair(0, 10000), "normal");
 
-    // auto start = chrono::steady_clock::now();
-    // mergeSort_ite(nums);
-    // auto end = chrono::steady_clock::now();
-
-    // auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
-
-    // cout << "Time taken by function: "
-    //      << duration.count() << " microseconds" << endl;
-
-    // mergeSort_ite(nums);
     quickSort(nums);
 
-    PROCESS_MEMORY_COUNTERS pmc;                                  // 用于获取内存信息
-    GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc)); // 获取内存信息
-    SIZE_T virtualMemUsedByMe = pmc.WorkingSetSize;               // 获取内存使用量
+    if (isSorted(nums))
+        cout << "Sorted!" << endl;
+    else
+        cout << "Not sorted!" << endl;
 
-    cout << "Memory used by me: " << virtualMemUsedByMe / 1024 << " KB" << endl;
+    return 0;
 }
