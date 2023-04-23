@@ -1,54 +1,59 @@
 #include <iostream>
-#include <string>
 using namespace std;
-class person
+class Base
 {
 private:
-    char *name;
+    float x, y;
 
 public:
-    person(char *pn);         // 构造函数声明
-    ~person(void);            // 析构函数声明
-    person(const person &ob); // 拷贝构造函数声明
-    char *get_name(void)
+    Base(float a = 0, float b = 0)
     {
-        return name;
+        x = a;
+        y = b;
     }
-    void print_name(void);
+    void print(void)
+    {
+        cout << " x=" << x << "  y=" << y;
+    }
 };
-
-person::person(char *pn) // 定义构造函数，为name提供值
+class Derived : public Base
 {
-    name =   ② ;
-    if (name != NULL)
-        ③ ;
+private:
+    float z;
+
+public:
+    Derived(float a = 0, float b = 0, float c = 0) : Base(a, b)
+    {
+        z = c;
+    }
+    void print(void)
+    {
+        Base::print();
+        cout << "  z=" << z;
+    }
+};
+void fun1(Base ob) // 普通函数
+{
+    ob.print();
+    cout << endl;
 }
-
-person::~person(void) // 显示定义析构函数
+void fun2(Base &ob) // 普通函数
 {
-    delete[] name;
+    ob.print();
+    cout << endl;
 }
-
-person::person(const person &ob) // 定义拷贝构造函数
+void fun3(Base *ob) // 普通函数
 {
-    name =  ④ ;
-    if (name != NULL)
-        ⑤ ;
-}
-
-void person::print_name(void)
-{
-    cout << name << endl;
+    ob->print();
+    cout << endl;
 }
 
 int main(void)
 {
-    person p1("张三");
-    person p2 = p1;
-    cout << "姓名:";
-    p1.print_name();
-    cout << "姓名:";
-    p2.print_name();
+    Derived ob(15.0, 25.0, 35.0);
+    fun1(ob);
+    fun2(ob);
+    fun3(&ob);
 
     return 0;
 }

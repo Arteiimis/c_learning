@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include "program_tester/tester.h"
+#include "program_tester/tester_2.h"
 using namespace std;
 
 void mergeSort(vector<int> &nums, int left, int right)
@@ -45,11 +45,7 @@ void mergeSort(vector<int> &nums, int left, int right)
 
 void mergeSort(vector<int> &nums)
 {
-    MONITOR_FUNCTION_BEGIN();
-
     mergeSort(nums, 0, nums.size() - 1);
-
-    MONITOR_FUNCTION_END();
 }
 
 // 归并排序迭代实现
@@ -184,28 +180,51 @@ void quickSort_mid(vector<int> &nums, int left, int right)
     int pivot = midPartition(nums, left, right);
     quickSort_mid(nums, left, pivot - 1);
     quickSort_mid(nums, pivot + 1, right);
+
+    // MONITOR_FUNCTION_END_WITHOUT_OUTPUT();
 }
 
 void quickSort(vector<int> &nums)
 {
-    MONITOR_FUNCTION_BEGIN();
+    // MONITOR_FUNCTION_BEGIN();
 
-    quickSort_rand(nums, 0, nums.size() - 1);
-
-    MONITOR_FUNCTION_END();
+    quickSort_mid(nums, 0, nums.size() - 1);
 }
+
+// int main()
+// {
+//     vector<int> nums;
+//     Fill(nums, 10000, make_pair(0, 10000), "normal");
+
+//     quickSort(nums);
+
+//     if (isSorted(nums))
+//         cout << "Sorted!" << endl;
+//     else
+//         cout << "Not sorted!" << endl;
+
+//     return 0;
+// }
 
 int main()
 {
+    MONITOR_FUNCTION_BEGIN();
     vector<int> nums;
-    Fill(nums, 10000, make_pair(0, 10000), "normal");
+    for (int counter = 0; counter < 20; counter++)
+    {
+        cout << "processing arr " << counter << endl;
+        Fill(nums, 100000, make_pair(0, 10000), "normal");
+        quickSort(nums);
+        if (!isSorted(nums))
+        {
+            cout << "Not sorted!" << endl;
+            return 0;
+        }
+    }
+    cout << "Sorted!" << endl;
 
-    quickSort(nums);
-
-    if (isSorted(nums))
-        cout << "Sorted!" << endl;
-    else
-        cout << "Not sorted!" << endl;
+    MONITOR_FUNCTION_END_WITHOUT_OUTPUT();
+    performance_monitor.print_summary();
 
     return 0;
 }
