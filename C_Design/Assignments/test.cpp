@@ -2,24 +2,30 @@
 #include <string>
 using namespace std;
 
-class Student {
+class Student
+{
 public:
-    Student(int id, string name, double score) {
+    Student(int id, string name, double score)
+    {
         this->id = id;
         this->name = name;
         this->score = score;
         count++;
         total_score += score;
     }
-    void display() {
+    void display()
+    {
         cout << "ID: " << id << ", Name: " << name << ", Score: " << score << endl;
     }
-    static int get_count() {
+    static int get_count()
+    {
         return count;
     }
-    static double get_average_score() {
+    static double get_average_score()
+    {
         return total_score / count;
     }
+
 private:
     int id;
     string name;
@@ -31,7 +37,8 @@ private:
 int Student::count = 0;
 double Student::total_score = 0;
 
-int main() {
+int main()
+{
     Student s1(1, "Alice", 90);
     Student s2(2, "Bob", 80);
     Student s3(3, "Charlie", 70);
