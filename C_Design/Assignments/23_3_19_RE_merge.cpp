@@ -60,12 +60,12 @@ public:
         size++;
     }
 
-    void sort()
+    void mergeSort()
     {
-        this->head = _sort(this->head);
+        this->head = mergeSort(this->head);
     }
 
-    listNode *_sort(listNode *head)
+    listNode *mergeSort(listNode *head)
     {
         if (head == nullptr || head->next == nullptr)
             return head;
@@ -80,8 +80,8 @@ public:
         listNode *mid = slow->next;
         slow->next = nullptr;
 
-        listNode *left = _sort(head);
-        listNode *right = _sort(mid);
+        listNode *left = mergeSort(head);
+        listNode *right = mergeSort(mid);
 
         return merge(left, right);
     }
@@ -111,6 +111,23 @@ public:
 
         return dummy->next;
     }
+
+    void quickSort()
+    {
+        quickSort(this->head, nullptr);
+    }
+
+    void quickSort(listNode *head, listNode *tail)
+    {
+        if (head == nullptr || head == tail || head->next == tail)
+            return;
+
+        listNode *pivot = partition(head, tail);
+        quickSort(head, pivot);
+        quickSort(pivot->next, tail);
+    }
+
+    
 
     void print()
     {
