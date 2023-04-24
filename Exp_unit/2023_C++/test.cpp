@@ -1,64 +1,44 @@
+#include <string.h>
 #include <iostream>
 using namespace std;
-class Base
-{
-private:
-    float x, y;
 
-public:
-    Base(float a = 0, float b = 0)
+class MyString 
+{ 
+    char *ptr;
+public :
+    MyString(char *s)
     {
-        x = a;
-        y = b;
+        ptr = new char[strlen(s) + 1];
+        strcpy(ptr, s);
     }
-    void setBase(float a = 0, float b = 0)
+    ~MyString()
     {
-        x = a;
-        y = b;
+        delete [] ptr;
     }
-    void print(void)
+    void print()
     {
-        cout << "  x=" << x << "  y=" << y;
+        cout << ptr << endl;
     }
+    MyString &operator=(const MyString &s);
 };
-class Derived : public Base
-{
-private:
-    float z;
 
-public:
-    Derived(float a = 0, float b = 0, float c = 0) : Base(a, b)
-    {
-        z = c;
-    }
-    void setDerived(float a = 0, float b = 0, float c = 0)
-    {
-        Base::setBase(a, b);
-        z = c;
-    }
-    void print(void)
-    {
-        Base::print();
-        cout << "  z=" << z;
-    }
-};
-int main(void)
+MyString &MyString::operator=(const MyString &s) //重载“=”运算符
+{ 
+    if (this == &s) 
+        return *this;  //当用“ob1=ob1;”时，直接返回
+    delete[] ptr; //释放被赋值对象的空间
+    ptr = new char[strlen(s.ptr) + 1]; //重新为被赋值对象分配空间
+    strcpy(ptr, s.ptr);
+    return *this;
+}
+
+int main()
 {
-    Base ob1;
-    Derived ob2;
-    ob2.setDerived(25.5, 35.5, 50.5);
-    ob1 = ob2;
-    ob1.print();
-    cout << endl;
-    ob2.print();
-    cout << endl;
-    Base *pb = &ob1;
-    pb->print();
-    cout << endl;
-    Derived *pd = &ob2;
-    pd->print();
-    cout << endl;
-    Base &cb = ob2;
-    cb.print();
-    cout << endl;
+    MyString p1("chen");
+    {
+        MyString p2("    ");
+        p2 = p1;
+        p2.print();
+    }
+    p1.print();
 }
