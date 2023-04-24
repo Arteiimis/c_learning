@@ -63,6 +63,7 @@ int main()
     } while (ch);
     delete[] p; // 释放内存
 }
+
 void input_base(score *p, int n) // 学生基本数据输入
 {
     int i, id, y1, m1, d1, y2, m2, d2;
@@ -95,6 +96,7 @@ void input_base(score *p, int n) // 学生基本数据输入
         p[i].set_student(id, sex, y2, m2, d2); // 完成函数的调用
     }
 }
+
 void input_score(score *p, int n, int m)
 {
     int i, j;
@@ -107,9 +109,10 @@ void input_score(score *p, int n, int m)
             cout << "第" << j + 1 << "科成绩：";
             cin >> x[j];
         }
-        p[i].set_score(); // 完成函数的调用
+        p[i].set_score(x, i); // 完成函数的调用
     }
 }
+
 void print_base(score *p, int n)
 {
     int i;
@@ -117,12 +120,14 @@ void print_base(score *p, int n)
         p[i].print_base();
     cout << endl;
 }
+
 void print_score(score *p, int n, int m)
 {
     int i;
     for (i = 0; i < n; i++)
         p[i].print_score();
 }
+
 score &average(score *p, int n, int m) // 用返回引用的方法
 {
     int i, j;
@@ -135,9 +140,10 @@ score &average(score *p, int n, int m) // 用返回引用的方法
         s[j] = s[j] / n;
     }
     aver.set_person("平均成绩", " ", 0, 0, 0);
-    aver.set_score(); // 完成函数的调用
+    aver.set_score(s, j); // 完成函数的调用
     return aver;
 }
+
 void sort(score *p, int n, int m) // 选择法排序：完成空白处的内容
 {
     score t;
@@ -148,12 +154,12 @@ void sort(score *p, int n, int m) // 选择法排序：完成空白处的内容
         a = p[i].get_aver();
         k = i;
         for (j = i + 1; j < n; j++)
-            if ()
+            if (p[j].get_aver() < a)
             {
                 a = p[j].get_aver();
                 k = j;
             }
-        if ()
+        if (i != k)
         {
             t = p[i];
             p[i] = p[k];

@@ -11,9 +11,14 @@ public:
         x = a;
         y = b;
     }
+    void setBase(float a = 0, float b = 0)
+    {
+        x = a;
+        y = b;
+    }
     void print(void)
     {
-        cout << " x=" << x << "  y=" << y;
+        cout << "  x=" << x << "  y=" << y;
     }
 };
 class Derived : public Base
@@ -26,34 +31,34 @@ public:
     {
         z = c;
     }
+    void setDerived(float a = 0, float b = 0, float c = 0)
+    {
+        Base::setBase(a, b);
+        z = c;
+    }
     void print(void)
     {
         Base::print();
         cout << "  z=" << z;
     }
 };
-void fun1(Base ob) // 普通函数
-{
-    ob.print();
-    cout << endl;
-}
-void fun2(Base &ob) // 普通函数
-{
-    ob.print();
-    cout << endl;
-}
-void fun3(Base *ob) // 普通函数
-{
-    ob->print();
-    cout << endl;
-}
-
 int main(void)
 {
-    Derived ob(15.0, 25.0, 35.0);
-    fun1(ob);
-    fun2(ob);
-    fun3(&ob);
-
-    return 0;
+    Base ob1;
+    Derived ob2;
+    ob2.setDerived(25.5, 35.5, 50.5);
+    ob1 = ob2;
+    ob1.print();
+    cout << endl;
+    ob2.print();
+    cout << endl;
+    Base *pb = &ob1;
+    pb->print();
+    cout << endl;
+    Derived *pd = &ob2;
+    pd->print();
+    cout << endl;
+    Base &cb = ob2;
+    cb.print();
+    cout << endl;
 }

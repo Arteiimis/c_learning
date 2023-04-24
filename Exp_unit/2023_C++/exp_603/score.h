@@ -50,6 +50,7 @@ void score::set_score(float x[], int n) // 提供成绩:完成成员函数的定
     }
     aver = sum / m;
 }
+
 void score::print(void) // 重载输出print()
 {
     student::print();
