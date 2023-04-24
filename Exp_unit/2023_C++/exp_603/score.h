@@ -38,6 +38,7 @@ score::score(void) // 无参构造函数
         sc[i] = 0;
     aver = 0;
 }
+
 void score::set_score(float x[], int n) // 提供成绩:完成成员函数的定义
 {
     int i;
@@ -59,6 +60,7 @@ void score::print(void) // 重载输出print()
         cout << "  " << sc[i];
     cout << "  " << aver << endl;
 }
+
 void score::print_score(void)
 {
     int j;
