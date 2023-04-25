@@ -1,44 +1,40 @@
-#include <string.h>
 #include <iostream>
 using namespace std;
-
-class MyString 
-{ 
-    char *ptr;
-public :
-    MyString(char *s)
+class base1
+{
+public:
+    virtual void fun()
     {
-        ptr = new char[strlen(s) + 1];
-        strcpy(ptr, s);
+        cout << "----base1----" << endl;
     }
-    ~MyString()
-    {
-        delete [] ptr;
-    }
-    void print()
-    {
-        cout << ptr << endl;
-    }
-    MyString &operator=(const MyString &s);
 };
-
-MyString &MyString::operator=(const MyString &s) //重载“=”运算符
-{ 
-    if (this == &s) 
-        return *this;  //当用“ob1=ob1;”时，直接返回
-    delete[] ptr; //释放被赋值对象的空间
-    ptr = new char[strlen(s.ptr) + 1]; //重新为被赋值对象分配空间
-    strcpy(ptr, s.ptr);
-    return *this;
-}
-
+class base2
+{
+public:
+    virtual void fun()
+    {
+        cout << "----base2----" << endl;
+    }
+};
+class derived : public base1, public base2
+{
+public:
+    void fun()
+    {
+        cout << "----derived----" << endl;
+    }
+};
 int main()
 {
-    MyString p1("chen");
-    {
-        MyString p2("    ");
-        p2 = p1;
-        p2.print();
-    }
-    p1.print();
+    base1 ob1, *p1;
+    base2 ob2, *p2;
+    derived ob3;
+    p1 = &ob1;
+    p1->fun();
+    p2 = &ob2;
+    p2->fun();
+    p1 = &ob3;
+    p1->fun();
+    p2 = &ob3;
+    p2->fun();
 }
