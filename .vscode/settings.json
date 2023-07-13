@@ -8,7 +8,6 @@
     "terminal.integrated.defaultProfile.windows": "PowerShell",
     
     "code-runner.executorMap": {
-
         "javascript": "node",
         "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
         "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt && del $fileNameWithoutExt.exe",
@@ -195,5 +194,7 @@
         "markdown": false,
         "cpp": true
     },
+    "C_Cpp.default.compilerPath": "D:\\mingw64\\bin\\g++.exe",
+    "cmake.sourceDirectory": "C:/Users/LEGION/Desktop/C _learning/C_Design/ObjectPool",
 }
 

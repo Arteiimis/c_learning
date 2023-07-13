@@ -2,12 +2,19 @@
     "configurations": [
         {
             "cppStandard": "c++23",
-            "cStandard": "c11",
-            "compilerPath": "D:\\mingw64\\bin\\g++.exe",
+            "cStandard": "c17",
+            "compilerPath": "D:/LLVM/bin/clang++.exe",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "D:/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++",
+                "D:/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32",
+                "D:/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward",
+                "D:/mingw64/x86_64-w64-mingw32/include",
+                "D:/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include",
+                "D:/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed",
+                "D:/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"
             ],
-            "intelliSenseMode": "windows-gcc-x64",
+            "intelliSenseMode": "windows-clang-x64",
             "name": "Win32"
         }
     ],

@@ -31,7 +31,8 @@ public:
             pstr->ref = 1;
             pstr->len = len;
             pstr->capacity = total - 1;
-            strcpy(pstr->data, p);
+            //strncpy(pstr->data, p, len);
+            memcpy(pstr->data, p, len + 1);
         }
     }
 
@@ -40,12 +41,28 @@ public:
         if (pstr != nullptr) { ++pstr->ref; }
     }
 
-    myString operator=(const myString& s)
+    myString(myString&& s) : pstr(s.pstr)
+    {
+        s.pstr = nullptr;
+    }
+
+    myString& operator=(const myString& s)
     {
         if (pstr == s.pstr) { return *this; }
         if (pstr != nullptr && --pstr->ref == 0) { free(pstr); }
         pstr = s.pstr;
         if (pstr != nullptr) { ++pstr->ref; }
+
+        return *this;
+    }
+
+    myString& operator=(myString&& s)
+    {
+        if (this == &s || (pstr == s.pstr && pstr != nullptr)) { return *this; }
+        if (pstr != nullptr && --pstr->ref == 0) { free(pstr); }
+        pstr = s.pstr;
+        s.pstr = nullptr;
+
         return *this;
     }
 
@@ -57,8 +74,10 @@ public:
         s1->ref = 1;
         s1->len = total;
         s1->capacity = total - 1;
-        strcpy(s1->data, pstr->data);
-        strcat(s1->data, s.pstr->data);
+        // strcpy(s1->data, pstr->data);
+        // strcat(s1->data, s.pstr->data);
+        memcpy(s1->data, pstr->data, pstr->len);
+        memcpy(s1->data + pstr->len, s.pstr->data, s.pstr->len + 1);
 
         return myString((const myString&) s1);
     }
@@ -71,8 +90,10 @@ public:
         s1->ref = 1;
         s1->len = total;
         s1->capacity = total - 1;
-        strcpy(s1->data, pstr->data);
-        strcat(s1->data, s.pstr->data);
+        // strcpy(s1->data, pstr->data);
+        // strcat(s1->data, s.pstr->data);
+        memcpy(s1->data, pstr->data, pstr->len);
+        memcpy(s1->data + pstr->len, s.pstr->data, s.pstr->len + 1);
 
         if (pstr != nullptr && --pstr->ref == 0) { free(pstr); }
         pstr = s1;
@@ -130,12 +151,20 @@ public:
 
 int main()
 {
-    myString s1("hello");
-    myString s2("world");
-    myString s3 = s1 + " " + s2;
-    cout << s3 << endl;
-    bool sign = s1 < s2;
-    cout << sign << endl;
+    // myString s1("hello");
+    // myString s2("world");
+    // myString s3 = s1 + " " + s2;
+    // cout << s3 << endl;
+    // bool sign = s1 < s2;
+    // cout << sign << endl;
+
+    string str1 = "hello";
+    string str2 = str1;
+    string str3 = str1;
+
+    cout << "str1: " << (void*) str1.c_str() << endl; // 输出字符串数据的地址
+    cout << "str2: " << (void*) str2.c_str() << endl;
+    cout << "str3: " << (void*) str3.c_str() << endl;
 
     return 0;
 }
